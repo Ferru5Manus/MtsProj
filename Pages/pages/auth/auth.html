@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang='ru'>
+
+<head>
+  <!-- ================ Meta tags ================ -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='utf-8'>
+
+    <!-- ================ Styles ================ -->
+    <link rel="stylesheet" href="/auth1">
+    <link rel="stylesheet" href="/styles">
+
+</head>
+
+<header class="header">
+            <div class="header__container">
+                <a class="header__logo" href="/">
+                    <img src="/logo" alt="" class="header__logo-img">
+                    <p class="header__logo-title">DanceCoin</p>
+                </a>
+                <div>
+                    <nav class="nav header__nav mx-auto">
+                        <a data-bs-toggle="modal" href="#launcher" role="button"  class="nav__link nowrap icons icon__download">Узнать о программе</a>
+
+                        <a href="/#servers" class="nav__link nowrap icons icon__servers">Наши партнёры</a>
+                        
+                        <a href="https://fudzilanddemonslayer.easydonate.ru" class="nav__link nowrap icons icon__servers">Таблица лидеров</a>
+
+                        <a href="/#social" class="nav__link nowrap icons icon__social">Соц. сети</a>
+                        
+                        <a href="https://discord.gg/vmMakg9F4F" class="nav__link nowrap icons icon__social">Тех. поддержка</a>
+                    </nav>
+                </div>
+                <div class="header__buttons"> 
+                    <a data-bs-toggle="modal" href="/Pages/pages/auth/loginPage.html" role="button"  class="btn btn-light">Вход</a>
+                    <a data-bs-toggle="modal" href="/pages/auth/auth.html" role="button"  class="btn btn-light">Регистрация</a>
+                </div>
+            </div>
+      </header>
+<body>
+  <div class="form_auth_block">
+    <div class="form_auth_block_content">
+      <p class="form_auth_block_head_text">Авторизация</p>
+      
+        <input type="email" name="auth_email" id="email" placeholder="Введите Ваш имейл" required >
+        <input type="password" name="auth_pass" id="psw" placeholder="Введите пароль" required >
+        <button onclick="Login()">Войти</button>
+      
+    </div>
+  </div>
+   <script>
+       async function Login() {
+           var email = document.getElementById("email").value
+           var password = document.getElementById("psw").value
+           if (email == "" || password == "") {
+               alert("all fields must ne filled")
+           }
+           else {
+               var response = await fetch("/login",
+                   {
+                       method: 'POST',
+                       headers: {
+                           'Content-Type': 'application/json'
+                       },
+                       body: JSON.stringify({ Login : email, Password: password })
+                   });
+               var Bool = JSON.parse(await response.text())
+               if (Bool == "true") {
+                   alert("Yra")
+               }
+               else {
+                   alert("Pizdyao")
+               }
+           }
+         
+       }
+   </script>
+</body>
